@@ -1,13 +1,19 @@
-name: Licensed
+name: Greeting on variable day
+
 on:
-  push: {branches: main}
-  pull_request: {branches: main}
+  workflow_dispatch
+
+env:
+  DAY_OF_WEEK: Monday
 
 jobs:
-  test:
+  greeting_job:
     runs-on: ubuntu-latest
-    name: Check licenses
+    env:
+      Greeting: Hello
     steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run licensed-check
+      - name: "Say Hello Mona it's Monday"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+
